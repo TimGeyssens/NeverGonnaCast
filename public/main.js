@@ -5,6 +5,9 @@ const castAllBtn = document.getElementById('castAllBtn');
 const videoInput = document.getElementById('videoInput');
 const statusBar = document.getElementById('statusBar');
 
+const DEFAULT_YOUTUBE =
+  'https://www.youtube.com/watch?v=dQw4w9WgXcQ&list=RDdQw4w9WgXcQ&start_radio=1';
+
 let devices = [];
 let selectedDeviceIds = new Set();
 
@@ -92,7 +95,7 @@ function renderDevices() {
 
 function updateCastButtonState() {
   castBtn.disabled = selectedDeviceIds.size === 0;
-  castAllBtn.disabled = !devices.length || !videoInput.value.trim();
+  castAllBtn.disabled = !devices.length;
 }
 
 async function fetchDevices({ withRefresh } = {}) {
@@ -126,13 +129,8 @@ async function fetchDevices({ withRefresh } = {}) {
 }
 
 async function castVideo() {
-  const videoUrl = videoInput.value.trim();
+  const videoUrl = videoInput.value.trim() || DEFAULT_YOUTUBE;
   if (selectedDeviceIds.size === 0) {
-    return;
-  }
-
-  if (!videoUrl) {
-    setStatus('error', 'Please paste a YouTube link or video ID first.');
     return;
   }
 
@@ -174,8 +172,8 @@ async function castVideo() {
 }
 
 async function castToAll() {
-  const videoUrl = videoInput.value.trim();
-  if (!videoUrl || !devices.length) return;
+  const videoUrl = videoInput.value.trim() || DEFAULT_YOUTUBE;
+  if (!devices.length) return;
 
   castAllBtn.disabled = true;
   castAllBtn.textContent = 'Casting to all…';

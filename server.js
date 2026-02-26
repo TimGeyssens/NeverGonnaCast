@@ -1,5 +1,6 @@
 const express = require('express');
 const path = require('path');
+const util = require('util');
 const dial = require('peer-dial');
 const castv2 = require('castv2-client');
 const mdns = require('multicast-dns')();
@@ -85,25 +86,32 @@ function extractYouTubeId(urlOrId) {
 
 const YOUTUBE_APP_ID = '233637DE';
 
-class YoutubeController extends RequestResponseController {
-  constructor(client, sourceId, destinationId) {
-    super(client, sourceId, destinationId, 'urn:x-cast:com.google.youtube.mdx');
-    this.once('close', () => {
-      this.stop();
-    });
-  }
-
-  load(videoId) {
-    const data = {
-      type: 'flingVideo',
-      data: {
-        currentTime: 0,
-        videoId
-      }
-    };
-    this.request(data);
-  }
+function YoutubeController(client, sourceId, destinationId) {
+  RequestResponseController.call(
+    this,
+    client,
+    sourceId,
+    destinationId,
+    'urn:x-cast:com.google.youtube.mdx'
+  );
+  const self = this;
+  this.once('close', () => {
+    self.stop();
+  });
 }
+
+util.inherits(YoutubeController, RequestResponseController);
+
+YoutubeController.prototype.load = function (videoId) {
+  const data = {
+    type: 'flingVideo',
+    data: {
+      currentTime: 0,
+      videoId
+    }
+  };
+  this.request(data);
+};
 
 class YoutubeApp extends Application {
   constructor(client, session) {
