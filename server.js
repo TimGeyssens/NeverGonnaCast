@@ -164,7 +164,7 @@ function launchOnDevice(deviceInfo, videoId) {
         });
       });
 
-      client.connect(deviceInfo.host, { port: deviceInfo.port }, () => {
+      client.connect({ host: deviceInfo.host, port: deviceInfo.port }, () => {
         client.launch(YoutubeApp, (err, player) => {
           if (err || !player) {
             clearTimeout(timeout);
