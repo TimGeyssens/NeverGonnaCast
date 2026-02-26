@@ -2,6 +2,8 @@
 
 QuickCast is a tiny Node.js tool with a neon, Rick Astley–inspired UI that lets you **cast a single YouTube video** to:
 
+![Never Gonna Cast](Screenshot.png)
+
 - **DIAL / SSDP devices** (via `peer-dial`)
 - **Google Cast v2 devices** (Chromecast, Cast‑enabled TVs, speakers) via `castv2-client` + mDNS
 
