@@ -1,0 +1,19 @@
+{
+  "name": "cast",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "castv2-client": "^1.2.0",
+    "express": "^5.2.1",
+    "multicast-dns": "^7.2.5",
+    "peer-dial": "^0.0.8"
+  }
+}

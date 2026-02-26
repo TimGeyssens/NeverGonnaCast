@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>QuickCast - Never Gonna Give You Cast</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app">
+      <div class="card">
+        <header class="card-header">
+          <h1>Never Gonna Cast</h1>
+          <p>Paste a link, pick your screens, and let Rick do the rest.</p>
+        </header>
+
+        <section class="field">
+          <label for="videoInput">YouTube link or video ID</label>
+          <div class="input-row">
+            <input
+              id="videoInput"
+              type="text"
+              placeholder="Paste a YouTube URL (or ID) here"
+            />
+          </div>
+        </section>
+
+        <section class="field">
+          <div class="field-header">
+            <label>Available devices</label>
+            <button id="refreshBtn" class="ghost-button" type="button">
+              Refresh
+            </button>
+          </div>
+          <div id="devicesContainer" class="devices">
+            <div class="muted">Scanning for devices…</div>
+          </div>
+        </section>
+
+        <div class="buttons-row">
+          <button id="castBtn" class="primary-button" type="button" disabled>
+            Cast to selected devices
+          </button>
+          <button id="castAllBtn" class="ghost-button wide-ghost" type="button" disabled>
+            Cast to all devices
+          </button>
+        </div>
+
+        <div id="statusBar" class="status status-hidden"></div>
+      </div>
+    </div>
+
+    <script src="main.js"></script>
+  </body>
+</html>
+
